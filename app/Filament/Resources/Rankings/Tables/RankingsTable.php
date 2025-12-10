@@ -13,6 +13,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+
 class RankingsTable
 {
     public static function configure(Table $table): Table
@@ -31,7 +32,8 @@ class RankingsTable
                 IconColumn::make('valid')
                     ->boolean(),
                 TextColumn::make('rank_mov')
-                    ->searchable(),
+                    ->numeric(false)
+                    ->formatStateUsing(fn ($state) => (string) $state),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

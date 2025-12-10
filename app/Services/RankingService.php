@@ -43,7 +43,7 @@ class RankingService
                 
                 if ($oldRank === null)
                 {
-                    $movement = '-';
+                    $movement = 'null';
                 }
 
                 elseif ($oldRank > $rank)
@@ -59,7 +59,7 @@ class RankingService
 
                 else 
                 {
-                    $movement = '-';
+                    $movement = 'none';
                 }
 
                 $rankings [] = Ranking::create([
