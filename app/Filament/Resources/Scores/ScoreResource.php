@@ -16,15 +16,16 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class ScoreResource extends Resource
 {
     protected static ?string $model = Score::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTrophy;
 
     protected static ?string $recordTitleAttribute = 'Score';
+    protected static ?string $navigationLabel = 'Score Pemain';
+    protected static ?string $pluralLabel = 'Score Pemain';
 
     public static function form(Schema $schema): Schema
     {

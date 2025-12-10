@@ -20,9 +20,11 @@ class RankingResource extends Resource
 {
     protected static ?string $model = Ranking::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowsUpDown;
 
     protected static ?string $recordTitleAttribute = 'Ranking';
+    protected static ?string $navigationLabel = 'Leaderboard';
+    protected static ?string $pluralLabel = 'Leaderboard';
 
     public static function form(Schema $schema): Schema
     {

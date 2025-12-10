@@ -18,8 +18,8 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->index();
-            $table->integer('point')->default(0);
-            $table->boolean('valid')->default(true);
+            $table->integer('point')->default(0)->index();
+            $table->boolean('valid')->default(true)->index();
             $table->timestamps();
         });
     }

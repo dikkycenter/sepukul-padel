@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('rank');
             $table->foreignId('player_id')->constrained()->cascadeOnDelete();
-            $table->integer('point')->default(0);
-            $table->boolean('valid')->default(true);
+            $table->integer('point')->default(0)->index();
+            $table->boolean('valid')->default(true)->index();
             $table->string('rank_mov')->nullable();
             $table->timestamps();
         });

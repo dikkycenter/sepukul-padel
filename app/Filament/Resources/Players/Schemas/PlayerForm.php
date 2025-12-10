@@ -35,7 +35,7 @@ class PlayerForm
                     ->image()
                     ->imageEditor()
                     ->imageEditorAspectRatios(['1:1'])
-                    ->required(),
+                    ->nullable(),
             ]);
     }
 }

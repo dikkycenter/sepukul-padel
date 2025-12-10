@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->enum('gender', ['L','P']);
             $table->string('phone');
-            $table->string('email');
-            $table->string('avatar');
+            $table->string('email')->unique();
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

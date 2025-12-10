@@ -20,9 +20,11 @@ class PlayerResource extends Resource
 {
     protected static ?string $model = Player::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
     protected static ?string $recordTitleAttribute = 'Player';
+    protected static ?string $navigationLabel = 'Daftar Pemain';
+    protected static ?string $pluralLabel = 'Daftar Pemain';
 
     public static function form(Schema $schema): Schema
     {
