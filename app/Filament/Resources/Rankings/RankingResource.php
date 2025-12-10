@@ -57,4 +57,6 @@ class RankingResource extends Resource
             'edit' => EditRanking::route('/{record}/edit'),
         ];
     }
+
+    
 }
