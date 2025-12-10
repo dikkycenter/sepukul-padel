@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,6 +16,9 @@ class ScoresTable
     {
         return $table
             ->columns([
+                ImageColumn::make('player.avatar')
+                    ->label('Avatar')
+                    ->circular(),
                 TextColumn::make('player.name')
                     ->label('Nama Pemain')
                     ->sortable(),
@@ -41,6 +45,7 @@ class ScoresTable
                 BulkActionGroup::make([
                 DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('point', 'desc');
     }
 }

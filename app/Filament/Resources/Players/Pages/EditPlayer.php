@@ -15,7 +15,12 @@ class EditPlayer extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
+            DeleteAction::make(),            
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

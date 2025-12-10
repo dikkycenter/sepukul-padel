@@ -1,41 +1,33 @@
 <?php
 
-namespace App\Filament\Resources\Players\Tables;
+namespace App\Filament\Resources\Rankings\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class PlayersTable
+class RankingsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                ImageColumn::make('avatar')
-                    ->label('Avatar')
-                    ->circular()
-                    ->extraImgAttributes([
-                        'loading' => 'lazy',
-                    ]),
-                TextColumn::make('name')
-                    ->label('Nama')
-                    ->searchable(),
-                TextColumn::make('gender')
-                    ->label('Jenis Kelamin')
-                    ->formatStateUsing(fn (string $state): string => match ($state){
-                        'L' => 'Laki-Laki',
-                        'P' => 'Perempuan',
-                    }),
-                TextColumn::make('phone')
-                    ->label('No. Telp')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email')
+                TextColumn::make('rank')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('player.name')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('point')
+                    ->numeric()
+                    ->sortable(),
+                IconColumn::make('valid')
+                    ->boolean(),
+                TextColumn::make('rank_mov')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
