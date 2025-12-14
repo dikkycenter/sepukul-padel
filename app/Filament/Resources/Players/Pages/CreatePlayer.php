@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePlayer extends CreateRecord
 {
     protected static string $resource = PlayerResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
 }

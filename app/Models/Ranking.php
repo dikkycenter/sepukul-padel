@@ -17,7 +17,7 @@ class Ranking extends Model
         'valid'     => 'boolean',
         'rank'      => 'integer',
         'point'     => 'integer',
-        'rank_mov'  => 'integer'
+        'rank_mov'  => 'string'
     ];
 
     public function player() : BelongsTo {
