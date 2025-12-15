@@ -30,7 +30,8 @@ class PlayersTable
                     ->formatStateUsing(fn (string $state): string => match ($state){
                         'L' => 'Laki-Laki',
                         'P' => 'Perempuan',
-                    }),
+                    })
+                    ->sortable(),
                 TextColumn::make('phone')
                     ->label('No. Telp')
                     ->searchable(),

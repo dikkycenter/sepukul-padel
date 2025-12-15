@@ -33,8 +33,6 @@ class RankingsTable
                 TextColumn::make('point')
                     ->numeric()
                     ->sortable(),
-                IconColumn::make('valid')
-                    ->boolean(),
                 IconColumn::make('rank_mov')
                     ->icon(function (string $state): string {
                         $sign = substr($state, 0, 1);
@@ -110,8 +108,17 @@ class RankingsTable
                     ->action(function()
                     {
                         $service = app(RankingService::class);
-                        $service->generateRankingSnapshot();
+                        $result  = $service->updateLeaderboard();
 
+                        if (!$result)
+                        {
+                            Notification::make()
+                                ->title('Tidak ada perubahan Data!')
+                                ->warning()
+                                ->send();
+                            
+                            return;
+                        }
                         Notification::make()
                         ->title('Ranking Updated!')
                         ->success()

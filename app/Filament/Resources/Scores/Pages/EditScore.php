@@ -7,6 +7,8 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 
 class EditScore extends EditRecord
 {
@@ -21,9 +23,22 @@ class EditScore extends EditRecord
         ];
     }
     
+
     // Update score baru, score lama valid => false
     
-    protected function beforeSave() : void{
+    protected function beforeSave() : void
+    {
+        // validation can update if changed
+        $state = $this->form->getState();
+        if ((int) $this->record->point === (int) ($state['point'] ?? null)) 
+        {
+            Notification::make() 
+            ->title('Gagal update! Point tidak berubah')
+            ->warning()
+            ->send();
+            
+            $this->halt();
+        }
         
         $this->record->updateNewScore($this->data);
 
@@ -37,4 +52,6 @@ class EditScore extends EditRecord
         $this->halt();
         
     }
+
+    
 }

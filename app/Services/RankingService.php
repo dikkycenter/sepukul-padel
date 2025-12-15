@@ -79,8 +79,33 @@ class RankingService
         
     // }
 
+    // Validation
+    public function updateLeaderboard(): bool
+    {
+        if(!$this->hasScoreChanged()) 
+        {
+            return false;
+        }
+        $this->generateRankingSnapshot();
+        return true;
+    }
 
-    public function generateRankingSnapshot(): array
+    private function hasScoreChanged() : bool
+    {
+        return DB::table('scores')
+            ->where('scores.valid', true)
+            ->leftJoin('rankings', function($join) {
+                $join->on('scores.player_id', '=', 'rankings.player_id')
+                ->where('rankings.valid', true);
+            })
+            ->where(function($query){
+                $query->whereNull('rankings.id')
+                ->orWhereColumn('scores.point', '!=', 'rankings.point');
+            })
+            ->exists();
+    }
+
+    private function generateRankingSnapshot(): array
     {
         return DB::transaction(function () {
 

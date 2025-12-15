@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Scores\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class ScoreForm
@@ -23,8 +22,7 @@ class ScoreForm
                 TextInput::make('point')
                     ->required()
                     ->numeric()
-                    ->default(0),
-                
+                    ->live(),
             ]);
     }
 }

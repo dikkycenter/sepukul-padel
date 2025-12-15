@@ -30,7 +30,8 @@ class PlayerForm
                     ->label('Alamat Email')
                     ->placeholder('contoh: mikohtb@gmail.com')
                     ->email()
-                    ->required(),
+                    ->required()
+                    ->unique('players','email',ignoreRecord: true),
                 FileUpload::make('avatar')
                     ->image()
                     ->imageEditor()
