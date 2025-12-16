@@ -9,6 +9,11 @@ class Player extends Model
 {
     use HasFactory;
 
+    public function score()
+    {
+        return $this->hasOne(Score::class);
+    }
+
     protected $fillable = [
         'name',
         'gender',
