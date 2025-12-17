@@ -21,8 +21,7 @@ class ScoreForm
                     ->dehydrated(), 
                 TextInput::make('point')
                     ->required()
-                    ->numeric()
-                    ->live(),
+                    ->numeric(),
             ]);
     }
 }
