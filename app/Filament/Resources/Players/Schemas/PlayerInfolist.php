@@ -22,7 +22,9 @@ class PlayerInfolist
                 TextEntry::make('phone'),
                 TextEntry::make('email')
                     ->label('Email address'),
-                ImageEntry::make('avatar'),
+                ImageEntry::make('avatar')
+                    ->disk('public')
+                    ->visibility('public'),
                 TextEntry::make('created_at')
                     ->dateTime(),
                 TextEntry::make('updated_at')

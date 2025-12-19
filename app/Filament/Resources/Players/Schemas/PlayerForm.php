@@ -34,8 +34,12 @@ class PlayerForm
                     ->unique('players','email',ignoreRecord: true),
                 FileUpload::make('avatar')
                     ->image()
+                    ->acceptedFileTypes(['image/png'])
+                    ->maxSize(5120)
                     ->imageEditor()
                     ->imageEditorAspectRatios(['1:1'])
+                    ->disk('public')
+                    ->directory('avatars')
                     ->nullable(),
             ]);
     }

@@ -18,6 +18,8 @@ class PlayersTable
             ->columns([
                 ImageColumn::make('avatar')
                     ->label('Avatar')
+                    ->disk('public')
+                    ->visibility('public')
                     ->circular()
                     ->extraImgAttributes([
                         'loading' => 'lazy',

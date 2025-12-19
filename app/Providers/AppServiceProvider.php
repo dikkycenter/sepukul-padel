@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Player;
+use App\Observers\PlayerObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Register PlayerObserver for new player score
-        Player::observe(\App\Observers\PlayerObserver::class);
+        Player::observe(PlayerObserver::class);
     }
 }
