@@ -18,7 +18,13 @@ class ScoresTable
             ->columns([
                 ImageColumn::make('player.avatar')
                     ->label('Avatar')
-                    ->circular(),
+                    ->getStateUsing(fn ($record) => $record->avatar_url)
+                    // ->disk('public')
+                    // ->visibility('public')
+                    ->circular()
+                    ->extraImgAttributes([
+                        'loading' => 'lazy',
+                    ]),
                 TextColumn::make('player.name')
                     ->label('Nama Pemain')
                     ->sortable(),

@@ -23,13 +23,20 @@ trait OptimizeImages
         // RULES
         if ($originalSize < $oneMb) {
             // < 1 MB → biarkan (cuma normalize 1:1)
-            $targetWidth = 512;
-        } elseif ($originalSize <= 2 * $oneMb) {
-            // 1–2 MB → kira2 setengah
-            $targetWidth = 384;
-        } else {
-            // 2–5 MB → target ~600 KB
-            $targetWidth = 256;
+            $targetWidth = $originalSize;
+        } elseif ($originalSize > $oneMb && $originalSize <= 2 * $oneMb) {
+            // 1–2 MB
+            $targetWidth = 900;
+        } elseif ($originalSize > 2 * $oneMb && $originalSize <= 3 * $oneMb) {
+            // 2–3 MB
+            $targetWidth = 850;
+        } elseif ($originalSize > 3 * $oneMb && $originalSize <= 4 * $oneMb) {
+            // 2–3 MB
+            $targetWidth = 800;
+        }
+        else {
+            // > 4 MB → target ~600 KB
+            $targetWidth = 750;
         }
 
         $manager = new ImageManager(new Driver());

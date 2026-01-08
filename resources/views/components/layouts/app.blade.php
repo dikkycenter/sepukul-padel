@@ -11,7 +11,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-        <body class="bg-[#2FA8E0] text-white font-sans">
+        <body class="bg-surface dark:bg-surface-dark text-white font-sans">
 
             {{-- HEADER --}}
             <!-- <header class="bg-[#1C3557] px-8 py-4">
@@ -25,6 +25,7 @@
             @livewireScripts
 
             @livewire('partials.footer')
-            <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+            <!-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> -->
+            <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
         </body>
 </html>

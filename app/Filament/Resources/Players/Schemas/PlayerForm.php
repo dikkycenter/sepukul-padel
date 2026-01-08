@@ -35,7 +35,7 @@ class PlayerForm
                 FileUpload::make('avatar')
                     ->image()
                     ->acceptedFileTypes(['image/png'])
-                    ->maxSize(5120)
+                    ->maxSize(6000)
                     ->imageEditor()
                     ->imageEditorAspectRatios(['1:1'])
                     ->disk('public')

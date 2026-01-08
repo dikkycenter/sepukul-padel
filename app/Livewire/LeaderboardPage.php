@@ -18,20 +18,15 @@ class LeaderboardPage extends Component
 
     public function nextSlide($total): void
     {
-        if ($total === 0) return;
+        if ($total <= 1) return;
 
         $this->activeSlide = ($this->activeSlide + 1) % $total;
     }
 
-    public function startAutoSlide(int $total): void
+    public function prevSlide($total)
     {
         if ($total <= 1) return;
 
-        $this->dispatch('start-auto-slide', total: $total);
-    }
-
-    public function prevSlide($total)
-    {
         $this->activeSlide = ($this->activeSlide - 1 + $total) % $total;
     }
 
