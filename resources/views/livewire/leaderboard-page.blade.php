@@ -48,24 +48,23 @@
 
             {{-- LEFT --}}
             <div>
-                <div class="text-[72px] flex flex-wrap my-1.5 md:text-[120px] font-black leading-none">
+                <div class="text-[40px] flex flex-wrap my-1.5 md:text-[120px] font-black leading-none md:leading-1">
                     <span class="opacity-75">{{$playerActive?->rank}}</span>
                 @if($playerActive && $playerActive->rank_mov !== 'none' && str_starts_with($playerActive->rank_mov, '+'))
-                    <span class="text-green-600 px-6 py-1 rounded font-bold text-xl">
+                    <span class="text-green-400 pl-2 mb-10 rounded font-bold text-[11px]">
                         ▲ {{ ltrim($playerActive->rank_mov, '+') }}
                     </span>
 
                 @elseif($playerActive && $playerActive->rank_mov !== 'none' && str_starts_with($playerActive->rank_mov, '-'))
-                    <span class="text-red-600 px-4 py-1 rounded font-bold text-xl">
+                    <span class="text-red-600 pl-2 mb-10 rounded font-bold text-[11px]">
                         ▼ {{ ltrim($playerActive->rank_mov, '-') }}
                     </span>
 
                 @endif
 
-                    <h1 class="text-4xl mx-4 md:text-5xl font-extrabold leading-none md:leading-tight text-center md:text-left uppercase">
+                    <h1 class="text-2xl mx-4 md:text-5xl font-extrabold leading-2 md:leading-tight text-center md:text-left capitalize">
                         {{ $playerActive?->name }}
                     </h1>
-
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center gap-3 md:gap-6 mt-4 md:mt-6">
@@ -144,7 +143,3 @@
         </div>
     </div>
 </div>
-
-
-
-

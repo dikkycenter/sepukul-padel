@@ -18,9 +18,9 @@ class PlayersTable
             ->columns([
                 ImageColumn::make('avatar')
                     ->label('Avatar')
-                    ->getStateUsing(fn ($record) => $record->avatar_url)
-                    // ->disk('public')
-                    // ->visibility('public')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->getStateUsing(fn($record) => $record->avatar_url)
                     ->circular()
                     ->extraImgAttributes([
                         'loading' => 'lazy',
@@ -30,7 +30,7 @@ class PlayersTable
                     ->searchable(),
                 TextColumn::make('gender')
                     ->label('Jenis Kelamin')
-                    ->formatStateUsing(fn (string $state): string => match ($state){
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'L' => 'Laki-Laki',
                         'P' => 'Perempuan',
                     })

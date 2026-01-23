@@ -13,7 +13,10 @@ class ScoreInfolist
         return $schema
             ->components([
                 ImageEntry::make('player.avatar')
-                    ->label('Avatar'),
+                    ->label('Avatar')
+                    ->label('Avatar')
+                    ->disk('public')
+                    ->visibility('public'),
                 TextEntry::make('player.name')
                     ->label('Nama Pemain'),
                 TextEntry::make('point')

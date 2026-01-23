@@ -18,9 +18,9 @@ class ScoresTable
             ->columns([
                 ImageColumn::make('player.avatar')
                     ->label('Avatar')
-                    ->getStateUsing(fn ($record) => $record->avatar_url)
-                    // ->disk('public')
-                    // ->visibility('public')
+                    ->disk('public')
+                    ->visibility('public')
+                    // ->getStateUsing(fn($record) => $record->avatar_url)
                     ->circular()
                     ->extraImgAttributes([
                         'loading' => 'lazy',
