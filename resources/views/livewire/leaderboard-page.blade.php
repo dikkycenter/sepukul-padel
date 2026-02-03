@@ -18,7 +18,7 @@
     @php
         $bestPlayer = $players->whereBetween('rank', [1,10])->values();
         $playerActive = $bestPlayer->get($activeSlide);
-        $others  = $players->filter(fn ($p) => $p->rank > 1);
+        $others  = $players->filter(fn ($p) => $p->rank > 10);
     @endphp
 
 
