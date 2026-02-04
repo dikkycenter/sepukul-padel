@@ -41,36 +41,49 @@
         @mouseleave="start()"
     >
 
-        <div class="bg-linear-to-tr from-[#2B82B9] via-[#3ca1cc] to-[#57C5C7] rounded-3xl mx-9 px-6 py-0 md:px-12 shadow-2xl
+        <div class="bg-linear-to-tr from-[#2B82B9] via-[#3ca1cc] to-[#57C5C7] rounded-3xl mx-9 px-6 py-0 md:px-12 md:pt-4 shadow-2xl
             flex flex-col-reverse md:flex-row
             items-center md:items-end
             gap-6 md:gap-0">
 
             {{-- LEFT --}}
             <div>
-                <div class="text-[40px] flex flex-wrap my-1.5 md:text-[120px] font-black leading-none md:leading-1">
-                    <span class="opacity-75">{{$playerActive?->rank}}</span>
-                @if($playerActive && $playerActive->rank_mov !== 'none' && str_starts_with($playerActive->rank_mov, '+'))
-                    <span class="text-green-400 pl-2 mb-10 rounded font-bold text-[11px]">
-                        ▲ {{ ltrim($playerActive->rank_mov, '+') }}
-                    </span>
+                <div class="text-8xl flex flex-wrap my-1.5 md:text-[120px] font-black leading-none md:leading-1">
+                    <span class="opacity-55 absolute top-18 left-18 md:top-22 md:left-25">{{$playerActive?->rank}}</span>
+                
 
-                @elseif($playerActive && $playerActive->rank_mov !== 'none' && str_starts_with($playerActive->rank_mov, '-'))
-                    <span class="text-red-600 pl-2 mb-10 rounded font-bold text-[11px]">
-                        ▼ {{ ltrim($playerActive->rank_mov, '-') }}
-                    </span>
-
-                @endif
-
-                    <h1 class="text-2xl mx-4 md:text-5xl font-extrabold leading-2 md:leading-tight text-center md:text-left capitalize">
+                    <h1 class="text-4xl mx-0 md:mx-4 md:text-5xl font-extrabold leading-auto text-center md:text-left capitalize">
                         {{ $playerActive?->name }}
                     </h1>
                 </div>
 
-                <div class="flex flex-col md:flex-row items-center gap-3 md:gap-6 mt-4 md:mt-6">
-                    <span class="text-xl py-4 md:py-0 md:mb-5">
-                        Points <b>{{ $playerActive?->point }}</b>
+                <div class="items-center py-4 mt-8 mb-2 md:mt-4 md:ml-4 text-center md:text-left">
+                    <!-- Label -->
+                    <span class="text-xl py-1 px-2.5 md:py-2 md:px-8 font-medium bg-[#2B82B9] border">
+                        Points
                     </span>
+
+                    <!-- Value -->
+                    <span class="text-xl py-1 px-4 md:py-2 md:px-8 font-extrabold bg-[#2B82B9] border border-l-0">
+                        {{ $playerActive?->point }}
+
+                        <!-- Movement -->
+                         @if($playerActive && $playerActive->rank_mov !== 'none' && str_starts_with($playerActive->rank_mov, '+'))
+                            <span class="text-green-400 font-bold text-[11px] align-middle">
+                                ▲ {{ ltrim($playerActive->rank_mov, '+') }}
+                            </span>
+
+                        @elseif($playerActive && $playerActive->rank_mov !== 'none' && str_starts_with($playerActive->rank_mov, '-'))
+                            <span class="text-red-600 font-bold text-[11px] align-middle">
+                                ▼ {{ ltrim($playerActive->rank_mov, '-') }}
+                            </span>
+                        @else
+                        <span class="text-white w-auto text-center inline-block font-bold">–</span>
+                        
+                        @endif
+                    </span>
+
+                    
                 </div>
             </div>
 
@@ -81,7 +94,7 @@
                         ? asset('storage/' . $playerActive->avatar)
                         : 'https://ui-avatars.com/api/?name=' . urlencode($playerActive?->name ?? 'Player') . '&size=400&background=ffffff&color=1C3557&border-radius=50%'
                 }}"
-                class="w-full border-b-0 border-b-sky-800 h-68 object-contain md:border-0 md:max-w-1/3 md:ms-auto md:mx-8 lg:ms-auto lg:mx-8"
+                class="relative z-10 w-full h-68 object-contain md:max-w-1/3 md:ms-auto md:mx-8 lg:ms-auto lg:mx-8"
             />
         </div>
 
@@ -109,35 +122,36 @@
     @endif  
 
     {{-- RANK 2+ --}}
-    <div class="bg-gray-100 p-10">
+    <div class="bg-gray-100 pt-8 px-2.5">
         <div class="max-w-3xl mx-auto space-y-1 px-4 md:px-0">
             @foreach ($others as $player)
             <div class="flex justify-between items-center bg-[#1C3557]
                 rounded-xl px-4 md:px-6 py-3 md:py-4">
-                <div class="flex items-center gap-4">
-                    <span class="font-extrabold w-8">#{{ $player->rank }}</span>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold w-8">#{{ $player->rank }}</span>
                         @if($player->rank_mov !== 'none' && str_starts_with($player->rank_mov, '+'))
-                        <span class="text-green-600 px-4 py-1 rounded font-bold">
+                        <span class="text-green-600 w-8 md:w-12 text-center inline-block font-bold">
                             ▲  {{ ltrim($player->rank_mov, '+') }}
                         </span>
 
                     @elseif($player->rank_mov !== 'none' && str_starts_with($player->rank_mov, '-'))
-                        <span class="text-red-600 px-4 py-1 rounded font-bold">
+                        <span class="text-red-600 w-8 md:w-12 text-center inline-block font-bold">
                             ▼  {{ ltrim($player->rank_mov, '-') }}
                         </span>
 
                     @else
-                        <span class="text-white px-4 py-1 rounded font-bold">–</span>
+                        <span class="text-white w-8 md:w-12 text-center inline-block font-bold">–</span>
                     @endif
-                    
-                    <img
-                        src="{{ asset('storage/' . $player->avatar) }}"
-                        onerror="this.src=`https://ui-avatars.com/api/?name={{ urlencode($player->name) }}&size=400&background=ffffff&color=1C3557`;"
-                        class="h-10 object-contain drop-shadow-xl rounded-full bg-amber-50"
-                    />
-                    <span class="font-medium text-lg">{{ $player->name }}</span>
+                    <div class="h-10 w-10 rounded-full overflow-hidden bg-amber-50 drop-shadow-xl">
+                        <img
+                            src="{{ asset('storage/' . $player->avatar) }}"
+                            onerror="this.src=`https://ui-avatars.com/api/?name={{ urlencode($player->name) }}&size=400&background=ffffff&color=1C3557`;"
+                            class="h-full w-full object-cover object-top"
+                        />
+                    </div>
+                    <span class="font-normal text-lg leading-5 md:text-lg md:font-bold">{{ $player->name }}</span>
                 </div>
-                <span class="font-bold text-lg">{{ $player->point }} pts</span>
+                <span class="font-bold text-lg md:text-2xl">{{ $player->point }} <a class="font-light text-xs">pts</a></span>
             </div>
             @endforeach
         </div>
