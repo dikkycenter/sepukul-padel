@@ -55,7 +55,7 @@
             Satu pukulan, sejuta keseruan. Main padel bareng teman, tingkatkan skill,
             dan jadi bagian dari komunitas padel paling seru di kota.
         </p>
-        <a href="{{ route('leaderboard') }}" class="inline-flex items-center text-white border-white border hover:bg-white hover:text-[#2B82B9] focus:ring-4 focus:ring-[#2B82B9] shadow-xs font-medium leading-5 rounded-base text-base px-5 py-3 focus:outline-none">
+        <a href="{{ route('leaderboard-page') }}" class="inline-flex items-center text-white border-white border hover:bg-white hover:text-[#2B82B9] focus:ring-4 focus:ring-[#2B82B9] shadow-xs font-medium leading-5 rounded-base text-base px-5 py-3 focus:outline-none">
             Lihat Tabel Klasemen
         </a>        
     </div>
@@ -83,7 +83,7 @@
                         
         </div>
         <div class="text-center">
-            <a href="#" class="inline-flex items-center text-lg font-medium text-[#2B82B9] hover:underline pt-8">
+            <a href="{{ route('gallery-page') }}" class="inline-flex items-center text-lg font-medium text-[#2B82B9] hover:underline pt-8">
             Lihat Lebih Banyak
             <svg class="w-5 h-5 ms-1 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
             </a>
@@ -95,7 +95,7 @@
         <div class="flex flex-col items-center text-center md:flex-row md:text-left md:items-center md:justify-between md:gap-12">
 
             <!-- Left Content -->
-            <div class="md:w-1/2 md:-mt-40 md:pr-12">
+            <div class="md:w-3/5 md:-mt-40 md:pr-4 text-center md:text-right md:pl-8">
                 <h1 class="mb-4 text-4xl font-regular tracking-tight text-slate-800 md:text-5xl md:whitespace-nowrap lg:text-6xl">
                     Ikuti <span class="font-extrabold bg-linear-to-r from-[#405DE6] via-[#C13584] to-[#FFDC80] inline-block text-transparent bg-clip-text">Instagram</span> Kami
                 </h1>
@@ -128,7 +128,7 @@
             </div>
 
             <!-- Right Mockup -->
-            <div class="flex items-center justify-center md:w-1/2">
+            <div class="flex items-center justify-center md:w-2/5">
                 <!-- iPhone 15 Container -->
                 <div class="relative w-72 h-150 rounded-[45px] shadow-[0_0_2px_2px_rgba(255,255,255,0.1)] border-8 border-zinc-900">
                     <!-- Dynamic Island -->

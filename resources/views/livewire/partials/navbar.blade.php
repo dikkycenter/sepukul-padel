@@ -29,13 +29,13 @@ function navActive($route) {
           <a href="{{ route('home') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent {{ navActive('home') }}">Home</a>
         </li>
         <li>
-          <a href="{{ route('leaderboard') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent {{ navActive('leaderboard') }}">Leaderboard</a>
+          <a href="{{ route('leaderboard-page') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent {{ navActive('leaderboard') }}">Leaderboard</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent">Galery</a>
+          <a href="{{ route('gallery-page') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent">Gallery</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent">Contact</a>
+          <a href="{{ route('contact-page') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent">Contact</a>
         </li>
       </ul>
     </div>

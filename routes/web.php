@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\ContactPage;
+use App\Livewire\GalleryPage;
 use App\Livewire\Home;
 use App\Livewire\LeaderboardPage;
 use Illuminate\Support\Facades\Route;
@@ -11,5 +13,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Home::class)
     ->name('home');
 
-Route::get('/leaderboard', LeaderboardPage::class)
-    ->name('leaderboard');
+Route::get('/leaderboard-page', LeaderboardPage::class)
+    ->name('leaderboard-page');
+
+Route::get('/gallery-page', GalleryPage::class)
+    ->name('gallery-page');
+
+Route::get('/contact-page', ContactPage::class)
+    ->name('contact-page');

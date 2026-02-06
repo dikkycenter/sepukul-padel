@@ -17,13 +17,13 @@
                           <a href="{{ route('home') }}" class="hover:underline">Home</a>
                       </li>
                       <li class="mb-4">
-                          <a href="{{ route('leaderboard') }}" class="hover:underline">Leaderboard</a>
+                          <a href="{{ route('leaderboard-page') }}" class="hover:underline">Leaderboard</a>
                       </li>
                       <li class="mb-4">
-                          <a href="#" class="hover:underline">Galery</a>
+                          <a href="{{ route('gallery-page') }}" class="hover:underline">Galery</a>
                       </li>
                       <li>
-                          <a href="#" class="hover:underline">Contact</a>
+                          <a href="{{ route('contact-page') }}" class="hover:underline">Contact</a>
                       </li>
                   </ul>
               </div>
