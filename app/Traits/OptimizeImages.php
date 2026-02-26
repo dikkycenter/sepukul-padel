@@ -10,47 +10,54 @@ trait OptimizeImages
 {
     public function optimizePngImage(string $path): void
     {
-    $fullPath = storage_path('app/public/' . $path);
+        $fullPath = storage_path('app/public/' . $path);
 
-    if (! file_exists($fullPath)) {
-        return;
-    }
-
-    $originalSize = filesize($fullPath); // bytes
-    $oneMb = 1024 * 1024;
-
-    try {
-        // RULES
-        if ($originalSize < $oneMb) {
-            // < 1 MB → biarkan (cuma normalize 1:1)
-            $targetWidth = $originalSize;
-        } elseif ($originalSize > $oneMb && $originalSize <= 2 * $oneMb) {
-            // 1–2 MB
-            $targetWidth = 900;
-        } elseif ($originalSize > 2 * $oneMb && $originalSize <= 3 * $oneMb) {
-            // 2–3 MB
-            $targetWidth = 850;
-        } elseif ($originalSize > 3 * $oneMb && $originalSize <= 4 * $oneMb) {
-            // 2–3 MB
-            $targetWidth = 800;
+        if (! file_exists($fullPath)) {
+            return;
         }
-        else {
-            // > 4 MB → target ~600 KB
-            $targetWidth = 750;
-        }
+
+        // $originalSize = filesize($fullPath); // bytes
 
         $manager = new ImageManager(new Driver());
+        $image = $manager->read($fullPath);
 
-        $image = $manager->read($fullPath)->cover($targetWidth, $targetWidth);
-        $encoded = $image->toPng();        
-        Storage::disk('public')->put($path, $encoded);
+        $oneMb = 1024 * 1024; //pixel
 
-    } catch (\Throwable $e) {
-        // optional: log error
-        logger()->error('Image optimize failed', [
-            'path' => $path,
-            'error' => $e->getMessage(),
-        ]);
-    }
+        try {
+            // RULES
+            if ($image > $oneMb) {
+                $image->scale(width: 1024);
+            }
+
+            // if ($originalSize < $oneMb) {
+            //     // < 1 MB → biarkan (cuma normalize 1:1)
+            //     $targetWidth = $originalSize;
+            // } elseif ($originalSize > $oneMb && $originalSize <= 2 * $oneMb) {
+            //     // 1–2 MB
+            //     $targetWidth = 900;
+            // } elseif ($originalSize > 2 * $oneMb && $originalSize <= 3 * $oneMb) {
+            //     // 2–3 MB
+            //     $targetWidth = 850;
+            // } elseif ($originalSize > 3 * $oneMb && $originalSize <= 4 * $oneMb) {
+            //     // 2–3 MB
+            //     $targetWidth = 800;
+            // }
+            // else {
+            //     // > 4 MB → target ~600 KB
+            //     $targetWidth = 750;
+            // }
+
+
+
+            $image->cover($oneMb, $oneMb, 'top');
+            $encoded = $image->toPng();
+            Storage::disk('public')->put($path, $encoded);
+        } catch (\Throwable $e) {
+            // optional: log error
+            logger()->error('Image optimize failed', [
+                'path' => $path,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 }

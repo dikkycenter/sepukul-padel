@@ -22,7 +22,7 @@ class PlayerResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
-    protected static ?string $recordTitleAttribute = 'Player';
+    protected static ?string $recordTitleAttribute = 'Pemain';
     protected static ?string $navigationLabel = 'Daftar Pemain';
     protected static ?string $pluralLabel = 'Daftar Pemain';
 

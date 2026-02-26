@@ -1,31 +1,88 @@
 <div>
-    <div class="bg-white p-12 items-center bg-center">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_590384716_17864256636557844_5666822151134049850_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_590392039_17864256564557844_8731243536903460920_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_613000875_17864256501557844_770487371903491456_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_613206508_17864256510557844_8762399443389330765_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_615821820_17864256606557844_3923491323960658262_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_615015742_17864256528557844_8059343603048514432_n.jpg')}}" alt="">
-            </div>
-                        
+    <div class="bg-white py-12 px-4">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            @foreach ($galleries as $gallery)
+                <div class="bg-white rounded-xl border border-default shadow-sm hover:shadow-md transition duration-300 flex flex-col overflow-hidden">
+
+                    {{-- Thumbnail --}}
+                    <a href="{{ route('gallery.detail', $gallery->slug) }}" class="block h-60 overflow-hidden">
+                        <img 
+                            class="w-full h-full object-cover hover:scale-105 transition duration-500"
+                            src="{{ asset('storage/' . $gallery->thumbnail) }}"
+                            loading="lazy"
+                            alt="{{ $gallery->title }}"
+                        />
+                    </a>
+
+                    {{-- Content --}}
+                    <div class="p-6 flex flex-col flex-1">
+
+                        {{-- Title --}}
+                        <a href="{{ route('gallery.detail', $gallery->slug) }}">
+                            <h3 class="text-xl font-semibold text-heading mb-2 capitalize hover:text-neutral-700 transition">
+                                {{ $gallery->title }}
+                            </h3>
+                        </a>
+
+                        {{-- Event Date --}}
+                        @if($gallery->event_date)
+                            <div class="flex items-center gap-2 text-sm text-body/70 mb-4">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-4 h-4 shrink-0 opacity-70">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+
+                                <span>
+                                    {{ $gallery->event_date->translatedFormat('d F Y') }}
+                                </span>
+
+                                <span class="text-xs text-body/50">
+                                    ({{ $gallery->event_date->diffForHumans() }})
+                                </span>
+                            </div>
+                        @endif
+
+                        {{-- Description --}}
+                        <p class="text-body text-sm leading-relaxed mb-6 line-clamp-3">
+                            {{ $gallery->description }}
+                        </p>
+
+                        {{-- Button --}}
+                        <div class="mt-auto">
+                            <a href="{{ route('gallery.detail', $gallery->slug) }}"
+                               class="inline-flex items-center gap-2 text-sm font-medium text-body bg-neutral-secondary-medium border border-default-medium rounded-base px-4 py-2.5 hover:bg-neutral-tertiary-medium hover:text-heading transition">
+                                Lihat Selengkapnya
+
+                                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+
         </div>
-        {{-- <div class="text-center">
-            <a href="#" class="inline-flex items-center text-lg font-medium text-[#2B82B9] hover:underline pt-8">
-            Lihat Lebih Banyak
-            <svg class="w-5 h-5 ms-1 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
-            </a>
-        </div> --}}
+    </div>
+
+    {{-- Pagination --}}
+    <div class="mt-8 flex justify-center">
+        {{ $galleries->links() }}
     </div>
 </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\ContactPage;
+use App\Livewire\GalleryDetail;
 use App\Livewire\GalleryPage;
 use App\Livewire\Home;
 use App\Livewire\LeaderboardPage;
@@ -18,6 +19,9 @@ Route::get('/leaderboard-page', LeaderboardPage::class)
 
 Route::get('/gallery-page', GalleryPage::class)
     ->name('gallery-page');
+
+Route::get('/gallery/{slug}', GalleryDetail::class)
+    ->name('gallery.detail');
 
 Route::get('/contact-page', ContactPage::class)
     ->name('contact-page');
