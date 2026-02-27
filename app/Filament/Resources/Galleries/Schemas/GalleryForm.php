@@ -40,7 +40,6 @@ class GalleryForm
                     ->image()
                     ->disk('public')
                     ->multiple()
-                    ->acceptedFileTypes(['image/jpg', 'image/jpeg', 'image/webp'])
                     ->imageEditor()
                     ->required(),
             ]);
