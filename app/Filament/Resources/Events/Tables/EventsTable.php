@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Galleries\Tables;
+namespace App\Filament\Resources\Events\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -8,14 +8,23 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
-class GalleriesTable
+class EventsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
+                ImageColumn::make('image')
+                    ->label('Tumbnail')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->extraImgAttributes([
+                        'alt' => 'image',
+                        'loading' => 'lazy',
+                    ]),
                 TextColumn::make('title')
                     ->label('Judul')
                     ->searchable(),
@@ -24,22 +33,12 @@ class GalleriesTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('event_date')
                     ->label('Tanggal Event')
-                    ->searchable()
                     ->dateTime('d F Y')
+                    ->searchable()
                     ->sortable(),
-                ImageColumn::make('image')
-                    ->label('Gambar')
-                    ->disk('public')
-                    ->visibility('public')
-                    ->circular()
-                    ->stacked()
-                    ->wrap()
-                    ->limit(3)
-                    ->limitedRemainingText()
-                    ->extraImgAttributes([
-                        'alt' => 'image',
-                        'loading' => 'lazy',
-                    ]),
+                ToggleColumn::make('flag')
+                    ->label('Pin')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
