@@ -22,6 +22,9 @@
                       <li class="mb-4">
                           <a href="{{ route('gallery-page') }}" class="hover:underline">Galery</a>
                       </li>
+                      <li class="mb-4">
+                          <a href="{{ route('event-page') }}" class="hover:underline">Event</a>
+                      </li>
                       <li>
                           <a href="{{ route('contact-page') }}" class="hover:underline">Contact</a>
                       </li>

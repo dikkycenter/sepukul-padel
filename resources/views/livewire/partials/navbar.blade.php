@@ -35,6 +35,9 @@ function navActive($route) {
           <a href="{{ route('gallery-page') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent">Gallery</a>
         </li>
         <li>
+          <a href="{{ route('event-page') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent">Event</a>
+        </li>
+        <li>
           <a href="{{ route('contact-page') }}" class="block py-2 px-3 font-bold text-heading rounded md:hover:bg-transparent md:border-0 md:hover:text-[#2B82B9] md:p-0 md:dark:hover:bg-transparent">Contact</a>
         </li>
       </ul>
