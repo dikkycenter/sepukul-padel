@@ -1,6 +1,6 @@
 <div class="py-8">
     <!-- Movement Ranking -->
-
+    @if ($bestPlayer->count())
     {{-- TAB GENDER --}}
     <div class="flex justify-center gap-0 mb-10">
         @foreach (['L' => 'Man', 'P' => 'Woman'] as $key => $label)
@@ -16,14 +16,12 @@
     </div>
 
     @php
-        $bestPlayer = $players->whereBetween('rank', [1,10])->values();
         $playerActive = $bestPlayer->get($activeSlide);
-        $others  = $players->filter(fn ($p) => $p->rank > 10);
     @endphp
 
 
     {{-- RANK #1 SLIDER --}}
-    @if ($bestPlayer->count())
+    
     <div class="relative max-w-6xl mx-auto mb-16"
         x-data="{
             interval: null,
@@ -53,7 +51,7 @@
                 
 
                     <h1 class="text-4xl mx-0 md:mx-4 md:text-5xl font-extrabold leading-auto text-center md:text-left capitalize">
-                        {{ $playerActive?->name }}
+                        {{ $playerActive?->player?->name }}
                     </h1>
                 </div>
 
@@ -90,9 +88,9 @@
             {{-- RIGHT IMAGE --}}
             <img
                 src="{{ 
-                    $playerActive && $playerActive->avatar
-                        ? asset('storage/' . $playerActive->avatar)
-                        : 'https://ui-avatars.com/api/?name=' . urlencode($playerActive?->name ?? 'Player') . '&size=400&background=ffffff&color=1C3557&border-radius=50%'
+                    $playerActive && $playerActive->player->avatar
+                        ? asset('storage/' . $playerActive->player?->avatar)
+                        : 'https://ui-avatars.com/api/?name=' . urlencode($playerActive?->player?->name ?? 'Player') . '&size=400&background=ffffff&color=1C3557&border-radius=50%'
                 }}"
                 class="relative z-10 w-full h-68 object-contain md:max-w-1/3 md:ms-auto md:mx-8 lg:ms-auto lg:mx-8"
             />
@@ -124,6 +122,17 @@
     {{-- RANK 2+ --}}
     <div class="bg-gray-100 pt-8 px-2.5">
         <div class="max-w-3xl mx-auto space-y-1 px-4 md:px-0">
+            <input
+                type="text"
+                wire:model.live.debounce.300ms="search"
+                x-data
+                autofocus
+                placeholder="Cari nama pemain..."
+                class="text-body/75 placeholder:text-body/55 px-5 py-2 bg-neutral-50 mb-6 w-full md:w-1/3 rounded-base border border-gray-300 
+               focus:outline-none focus:ring-2 focus:ring-[#1C3557]
+               shadow-sm"
+            >
+            @if($others->count())
             @foreach ($others as $player)
             <div class="flex justify-between items-center bg-[#1C3557]
                 rounded-xl px-4 md:px-6 py-3 md:py-4">
@@ -144,16 +153,30 @@
                     @endif
                     <div class="h-10 w-10 rounded-full overflow-hidden bg-amber-50 drop-shadow-xl">
                         <img
-                            src="{{ asset('storage/' . $player->avatar) }}"
-                            onerror="this.src=`https://ui-avatars.com/api/?name={{ urlencode($player->name) }}&size=400&background=ffffff&color=1C3557`;"
+                            src="{{ asset('storage/' . $player->player?->avatar) }}"
+                            onerror="this.src=`https://ui-avatars.com/api/?name={{ urlencode($player->player?->name) }}&size=400&background=ffffff&color=1C3557`;"
                             class="h-full w-full object-cover object-top"
                         />
                     </div>
-                    <span class="font-normal text-lg leading-5 md:text-lg md:font-bold">{{ $player->name }}</span>
+                    <span class="font-normal text-lg leading-5 md:text-lg md:font-bold">{{ $player->player?->name }}</span>
                 </div>
                 <span class="font-bold text-lg md:text-2xl">{{ $player->point }} <a class="font-light text-xs">pts</a></span>
             </div>
             @endforeach
         </div>
+
+        {{-- Pagination --}}
+        <div class="py-8 flex justify-center-safe">
+            {{ $others->links() }}
+        </div>
+        @else
+        <div class="text-center py-12 text-gray-500 font-semibold">
+        Tidak ditemukan
+        </div>
+        @endif
     </div>
+    
+    </div>
+
+    
 </div>

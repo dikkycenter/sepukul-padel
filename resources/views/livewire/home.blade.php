@@ -46,41 +46,161 @@
         </button>
     </div>
 
+    {{-- Event --}}
+    <h1 class="mt-6 text-center text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-5xl">
+        Events Upcoming
+    </h1>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 pt-8 px-8 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    @foreach ($events as $event)
+        <a href="{{ route('event.detail', $event->slug) }}"
+        class="group relative block rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition duration-500">
+
+            {{-- Image --}}
+            <img 
+                src="{{ asset('storage/' . $event->image) }}"
+                alt="{{ $event->title }}"
+                class="w-full h-60 object-cover transition duration-700 group-hover:scale-105"
+                loading="lazy"
+            >
+
+            {{-- Dark Overlay --}}
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/75 transition duration-500"></div>
+
+            {{-- Content Overlay --}}
+            <div class="absolute inset-0 flex flex-col justify-end p-6 
+                        opacity-0 translate-y-6 
+                        group-hover:opacity-100 group-hover:translate-y-0
+                        transition duration-500">
+
+                <h3 class="text-white text-xl font-semibold mb-2 capitalize">
+                    {{ $event->title }}
+                </h3>
+
+                @if($event->event_date)
+                    <div class="flex items-center gap-2 text-sm text-white/80">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+
+                        <span>
+                            {{ $event->event_date->translatedFormat('d F Y') }}
+                        </span>
+                        <span class="text-xs">
+                            ({{ $event->event_date->diffForHumans() }})
+                        </span>
+                    </div>
+                @endif
+
+            </div>
+
+        </a>
+    @endforeach
+        
+    </div>
+    <div class="text-center mb-10">
+        <a href="{{ route('event-page') }}" class="inline-flex items-center text-lg font-medium text-white hover:underline pt-8">
+        Lihat Event Lainnya
+        <svg class="w-5 h-5 ms-1 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
+        </a>
+    </div>
+    
+
     {{-- Opening --}}
-    <div class="p-12 text-center text-white">
-        <h1 class="mb-4 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
+    <div class="p-12 text-center text-[#2B82B9] bg-white">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight text-[#2B82B9] md:text-5xl lg:text-6xl">
             Sepukul Padel Club
         </h1>
-        <p class="mb-4 text-lg font-normal text-white lg:text-xl sm:px-16 xl:px-48">
+        <p class="mb-4 text-lg font-normal text-[#2B82B9] lg:text-xl sm:px-16 xl:px-48">
             Satu pukulan, sejuta keseruan. Main padel bareng teman, tingkatkan skill,
             dan jadi bagian dari komunitas padel paling seru di kota.
         </p>
-        <a href="{{ route('leaderboard-page') }}" class="inline-flex items-center text-white border-white border hover:bg-white hover:text-[#2B82B9] focus:ring-4 focus:ring-[#2B82B9] shadow-xs font-medium leading-5 rounded-base text-base px-5 py-3 focus:outline-none">
+        <a href="{{ route('leaderboard-page') }}" class="inline-flex items-center text-[#2B82B9] border-[#2B82B9] border hover:bg-[#2B82B9] hover:text-white focus:ring-4 focus:ring-[#2B82B9] shadow-xs font-medium leading-5 rounded-base text-base px-5 py-3 focus:outline-none">
             Lihat Tabel Klasemen
         </a>        
     </div>
     {{-- Gallery --}}
-    <div class="bg-white p-12 items-center bg-center">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_590384716_17864256636557844_5666822151134049850_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_590392039_17864256564557844_8731243536903460920_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_613000875_17864256501557844_770487371903491456_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_613206508_17864256510557844_8762399443389330765_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_615821820_17864256606557844_3923491323960658262_n.jpg')}}" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-base" src="{{ asset('gallery/instasave.website_615821820_17864256606557844_3923491323960658262_n.jpg')}}" alt="">
-            </div>
-                        
+    <div class="bg-gray-100 p-12 items-center bg-center">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            @foreach ($galleries as $gallery)
+                <div class="bg-white rounded-xl border border-default shadow-sm hover:shadow-md transition duration-300 flex flex-col overflow-hidden">
+
+                    {{-- Thumbnail --}}
+                    <a href="{{ route('gallery.detail', $gallery->slug) }}" class="block h-60 overflow-hidden">
+                        <img 
+                            class="w-full h-full object-cover hover:scale-105 transition duration-500"
+                            src="{{ asset('storage/' . $gallery->thumbnail) }}"
+                            loading="lazy"
+                            alt="{{ $gallery->title }}"
+                        />
+                    </a>
+
+                    {{-- Content --}}
+                    <div class="p-6 flex flex-col flex-1">
+
+                        {{-- Title --}}
+                        <a href="{{ route('gallery.detail', $gallery->slug) }}">
+                            <h3 class="text-xl font-semibold text-heading mb-2 capitalize hover:text-neutral-700 transition">
+                                {{ $gallery->title }}
+                            </h3>
+                        </a>
+
+                        {{-- Event Date --}}
+                        @if($gallery->event_date)
+                            <div class="flex items-center gap-2 text-sm text-body/70 mb-4">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-4 h-4 shrink-0 opacity-70">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+
+                                <span>
+                                    {{ $gallery->event_date->translatedFormat('d F Y') }}
+                                </span>
+
+                                <span class="text-xs text-body/50">
+                                    ({{ $gallery->event_date->diffForHumans() }})
+                                </span>
+                            </div>
+                        @endif                        
+
+                        {{-- Button --}}
+                        <div class="mt-auto">
+                            <a href="{{ route('gallery.detail', $gallery->slug) }}"
+                               class="inline-flex items-center gap-2 text-sm font-medium text-body bg-neutral-secondary-medium border border-default-medium rounded-base px-4 py-2.5 hover:bg-neutral-tertiary-medium hover:text-heading transition">
+                                Lihat Selengkapnya
+
+                                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+
         </div>
         <div class="text-center">
             <a href="{{ route('gallery-page') }}" class="inline-flex items-center text-lg font-medium text-[#2B82B9] hover:underline pt-8">
