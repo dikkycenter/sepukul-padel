@@ -31,4 +31,16 @@ class Event extends Model
             $event->slug = $count ? "{$slug}-{$count}" : $slug;
         });
     }
+
+    public function scopeUpcoming($query)
+    {
+        return $query->whereDate('event_date', '>=', now())
+            ->orderBy('event_date', 'asc');
+    }
+
+    public function scopePast($query)
+    {
+        return $query->whereDate('event_date', '<', now())
+            ->orderBy('event_date', 'desc');
+    }
 }
